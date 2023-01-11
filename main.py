@@ -14,17 +14,15 @@ def drag_motion(event):
     y = widget.winfo_y() - widget.startY + event.y
     widget.place(x=x, y=y)
 
-left_frame = Label(window, bg = "black", width = 15, height =1250)
+left_frame = Frame(window, bg = "black", width = 150, height =500)
 left_frame.pack(side = LEFT)
 
-label = Label(window, bg="red",width=10,height=5)
-label.place(x = -15, y = 0)
-label.pack(side = LEFT)
+label = Label(window, bg="red",width=10,height = 5)
+label.place(x = 0, y = 0)
+label.pack(side = TOP)
 label2 = Label(window,bg="blue",width=10,height=5)
 label2.place(x = 15, y = 0)
-label2.pack(padx=25, pady =100)
-
-
+label2.pack(side= BOTTOM)
 
 
 label.bind("<Button-1>",drag_start)
