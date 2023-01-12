@@ -18,8 +18,7 @@ def label_motion(_label):
 
 def create_label(obj,screen):
     obj_img = tk.PhotoImage(file="images\\"+obj+".png")
-    _label = tk.Label(screen, image=obj_img, bg="orange")
+    _label = tk.Label(screen, image=obj_img, bg="grey")
     _label.place(relx=0, rely=0)
-    _label.bind("<Button-1>",drag_start)
-    _label.bind("<B1-Motion>",drag_motion)
+    label_motion(_label)
 

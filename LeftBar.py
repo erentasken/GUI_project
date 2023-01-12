@@ -1,3 +1,4 @@
+from functools import partial
 import tkinter as tk
 import ButtonActivity
 
@@ -14,7 +15,7 @@ def create_frame(window):
 
     for i in objects:
         j += 0.2
-        button_obj = button(frame_left, text=i, activebackground="grey", command=ButtonActivity.create_label(i,window))
+        button_obj = button(frame_left, text=i, activebackground="grey", command=partial(ButtonActivity.create_label,i,window))
         button_obj.place(relx=0.1, rely=j, relwidth=0.75, relheight=0.1)
         
 
