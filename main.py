@@ -20,8 +20,8 @@ def drag_motion(event):
     widget.place(x=x, y=y)
 
 def create_label_rect():
-    _label = tk.Label(frame_cordinate, image=rectangle_img)
-    _label.place(relx=0, rely=0)
+    _label = tk.Label(frame_cordinate, bg="white", borderwidth=1, relief="solid")
+    _label.place(relx=0, rely=0, width=250, height=125)
     _label.bind("<Button-1>",drag_start)
     _label.bind("<B1-Motion>",drag_motion)
 
