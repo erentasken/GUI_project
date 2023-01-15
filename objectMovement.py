@@ -16,10 +16,11 @@ class Movement:
         y = widget.winfo_y() - widget.startY + e.y
         widget.place(x=x, y=y)
 
+    def delete_object(self, e):
+        widget = e.widget
+        widget.destroy()
+
     def obj_motion(self):
         self.obj.bind("<Button-1>", self.drag_start)
         self.obj.bind("<B1-Motion>", self.drag_motion)
         self.obj.bind("<Button-3>",self.delete_object)
-    def delete_object(self, e):
-        widget = e.widget
-        widget.destroy()
