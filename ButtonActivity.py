@@ -1,7 +1,8 @@
-import tkinter as tk
-import pyautogui
+from tkinter import *
+import objectMovement
 
 
+'''
 def drag_start(event):
     widget = event.widget
     widget.startX = event.x
@@ -16,11 +17,13 @@ def drag_motion(event):
 def label_motion(_label):
     _label.bind("<Button-1>",drag_start)
     _label.bind("<B1-Motion>",drag_motion)
+'''
 
 def create_label(obj,screen):
-    obj_img = tk.PhotoImage(file="images\\"+obj+".png")
-    _label = tk.Label(screen, image=obj_img)
-    _label.place(relx = 0, rely = 0)
-    label_motion(_label)
+    obj_img = PhotoImage(file="images\\"+obj+".png")
+    _label = Label(screen, image=obj_img)
+    _label.place(relx=0, rely=0)
+    move = objectMovement.Movement(obj)
+
 
 
