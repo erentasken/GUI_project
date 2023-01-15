@@ -1,8 +1,6 @@
 from tkinter import *
 import objectMovement
 import objectArrangement
-
-
 def create_label(obj, screen):
     obj_text = ""
     obj_img = PhotoImage(file="images\\" + obj + ".png")

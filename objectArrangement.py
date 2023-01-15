@@ -1,7 +1,5 @@
 from tkinter import *
 from functools import partial
-
-
 class Arrangement:
     def __init__(self, obj, screen):
         self.obj = obj
