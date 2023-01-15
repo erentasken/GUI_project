@@ -8,6 +8,6 @@ class CoordinateScreen:
         self.create_screen()
 
     def create_screen(self):
-        self.coordinateSystem = Canvas(self.screen, bg="red")
+        self.coordinateSystem = Canvas(self.screen)
         self.coordinateSystem.place(relx=0.1, rely=0, relwidth=0.9, relheight=1)
 
