@@ -12,13 +12,19 @@ def drag_motion(event):
     y = widget.winfo_y() - widget.startY + event.y
     widget.place(x=x, y=y)
 
-def label_motion(_label):
-    _label.bind("<Button-1>",drag_start)
-    _label.bind("<B1-Motion>",drag_motion)
+def delete_object(event):
+    widget = event.widget
+    widget.destroy()
 
-def create_label(obj,screen):
+def label_motion(_label):
+    _label.bind("<Button-1>", drag_start)
+    _label.bind("<B1-Motion>", drag_motion)
+    _label.bind("<Button-3>", delete_object)
+
+def create_label(obj, screen):
     obj_img = PhotoImage(file="images\\"+obj+".png")
     _label = Label(screen, image=obj_img)
     _label.img = obj_img 
     _label.place(relx=0, rely=0)
+    _label.bind("<Button-3>",delete_object)
     move = objectMovement.Movement(_label)
