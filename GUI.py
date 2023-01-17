@@ -8,7 +8,7 @@ class GUI:
     def __init__(self):
         self.objects = {"arrow", "rectangle"}  # list of shapes
         self.window = Tk()
-        self.window.geometry("700x600+1200+80")
+        self.window.geometry("900x700+1000+80")
         self.window.title("Graphical Modeling Editor")
         self.CoordinateScreen()
         self.create_frame(self.window, self.coordinateSystem, self.objects)
@@ -29,12 +29,19 @@ class GUI:
         objectBehaviours.TextInput(_label, self.screen)
 
     def create_frame(self, screen, plotScreen, objects):  # creates left-column puts the object's buttons as well.
-        j = 0
+        col = 0
+        row = 0
         frame_left = Frame(screen, bg="#141E27")
         frame_left.place(relx=0, rely=0, relwidth=0.1, relheight=1)
+        btn_frame = Frame(frame_left, bg="#141E27")
+        btn_frame.place(relx=0.05, rely=0.2, relwidth=0.9, relheight=0.8)
+        btn_frame.columnconfigure(0, weight=1)
+        btn_frame.columnconfigure(1, weight=1)
 
-        for i in objects:
-            j += 0.2
-            button_obj = Button(frame_left, text=i, bg="#EEEDDE", activebackground="#203239",
-                                command=partial(self.create_label, i, plotScreen))
-            button_obj.place(relx=0.1, rely=j, relwidth=0.75, relheight=0.1)
+        for obj in objects:
+            button_obj = Button(btn_frame, text=obj, bg="#EEEDDE", activebackground="#203239",
+                                command=partial(self.create_label, obj, plotScreen))
+            button_obj.place(relwidth=0.5)
+            button_obj.grid(row=int(row), column=col % 2, sticky=N + W + S + E)
+            col += 1
+            row += 0.5
