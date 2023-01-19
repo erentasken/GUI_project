@@ -29,7 +29,8 @@ class GUI:
         self.coordinateSystem.place(relx=0.1, rely=0, relwidth=0.9, relheight=1)
 
     def create_obj(self, obj, screen):
-        _obj = objectBehaviours.Objects(obj, screen)
+        newObj = objectBehaviours.Objects(obj, screen)
+        objectBehaviours.ObjectTrigger.Triggers(newObj, screen)
 
     def create_frame(self):  # creates left-column puts the object's buttons as well.
         col = 0

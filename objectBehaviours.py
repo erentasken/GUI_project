@@ -16,16 +16,12 @@ class Objects:
         self.obj_links = []
 
         self.create_label()
-        self.obj_triggers()
 
     def create_label(self):
         self.obj_img = PhotoImage(file="images\\" + self.obj + ".png")
         self.obj_label = Label(self.screen, image=self.obj_img, compound=CENTER)
         self.obj_label.img = self.obj_img
         self.obj_label.place(relx=0, rely=0)
-
-    def obj_triggers(self):
-        ObjectTrigger.Triggers(self.obj_label, self.screen)
 
 
 class TextInput:
@@ -34,10 +30,9 @@ class TextInput:
         self.screen = screen
 
     def printInput(self, inputTxt, frame):
-        self.frame = frame
         txt = inputTxt.get(1.0, "end-1c")
         self.obj.config(text=txt)
-        self.frame.destroy()
+        frame.destroy()
 
     def create_text(self):
         textFrame = Canvas(self.screen)
@@ -50,4 +45,3 @@ class TextInput:
         btn = Button(textFrame, text="✓", bg="#EEEDDE", activebackground="#203239",
                      command=partial(self.printInput, inputTxt, textFrame))
         btn.place(rely=0.8, relheight=0.2, relwidth=1)
-
