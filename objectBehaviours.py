@@ -13,6 +13,7 @@ class Objects:
         self.obj_txt = None
         self.long_edge = 300
         self.short_edge = 150
+        self.obj_isLink = False
         self.obj_links = []
 
         self.create_label()

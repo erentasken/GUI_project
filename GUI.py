@@ -6,6 +6,8 @@ import objectBehaviours
 
 
 class GUI:
+    isLink = False
+
     def __init__(self):
 
         self.coordinateSystem = None
