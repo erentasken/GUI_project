@@ -33,23 +33,48 @@ class TextInput:
     def __init__(self, obj, screen):
         self.obj = obj
         self.screen = screen
-        self.inputTrigger()
+        self.trigger()
 
-    def _printInput(self, inputTxt, frame):
+    def create_text(self, e):
+        objectFeature(self.obj, self.screen)
+
+    def trigger(self):
+        self.obj.bind("<Double-Button-1>", self.create_text) #triggers the input screen
+
+class objectFeature:
+    def __init__(self, obj, screen):
+        self.obj = obj
+        self.screen = screen
+        self.objectFeatureTab = None
+        self.trigger()
+
+    def close_tab(self): #closes the tab (triggers from objectFeatureTabInit() function)
+        self.objectFeatureTab.destroy()
+
+    def objectFeatureTabInit(self, e): # it creates the objectFeature adjustment tab on the right of the screen,
+        self.objectFeatureTab = Frame(self.screen, bg = "#141E27")
+        self.objectFeatureTab.place(relx= 0.9, rely = 0, relwidth = 0.1, relheight=1)
+        self.inputArea()
+
+        close_btn = Button(self.objectFeatureTab, text="X", bg="gray", fg='white', font=("Arial", 12, 'bold'), width=2,
+                           height=1, command=self.close_tab) #close button for closing that tab.
+        close_btn.place(relx=0.95, rely=0.05, anchor='ne')
+
+    def printInput(self, inputTxt, frame):
         self.frame = frame
         txt = inputTxt.get(1.0, "end-1c")
         self.obj.config(text=txt)
         self.frame.destroy()
 
-    def _create_text(self, e):
-        textFrame = Canvas(self.screen)
-        textFrame.place(relx=0.4, rely=0.8, relheight=0.2, relwidth=0.4)
+    def inputArea(self):
+        textFrame = Canvas(self.objectFeatureTab)
+        textFrame.place(relx=0.2, rely=0.2, relheight=0.2, relwidth=0.7)
         inputTxt = Text(textFrame)
         inputTxt.insert(INSERT, self.obj.cget("text"))
         inputTxt.place(relheight=0.8, relwidth=1)
         btn = Button(textFrame, text="✓", bg="#EEEDDE", activebackground="#203239",
-                     command=partial(self._printInput, inputTxt, textFrame))
+                     command=partial(self. printInput, inputTxt, textFrame))
         btn.place(rely=0.8, relheight=0.2, relwidth=1)
 
-    def inputTrigger(self):
-        self.obj.bind("<Double-Button-1>", self._create_text)
+    def trigger(self):
+        self.obj.bind("<Double-Button-1>", self.objectFeatureTabInit)  # triggers the input screen

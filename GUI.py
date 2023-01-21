@@ -26,7 +26,7 @@ class GUI:
         _label.img = obj_img
         _label.place(relx=0, rely=0)
         objectBehaviours.Movement(_label)
-        objectBehaviours.TextInput(_label, self.screen)
+        objectBehaviours.objectFeature(_label, self.screen)
 
     def create_frame(self, screen, plotScreen, objects):  # creates left-column puts the object's buttons as well.
         col = 0
