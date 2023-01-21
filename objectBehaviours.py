@@ -11,6 +11,9 @@ class Objects:
         self.obj_img = None
         self.obj_label = None
         self.obj_txt = None
+
+        self.obj_pos_x = None
+        self.obj_pos_y = None
         self.long_edge = 300
         self.short_edge = 150
         self.obj_isLink = False

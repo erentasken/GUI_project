@@ -6,9 +6,9 @@ import GUI
 class Triggers:
     def __init__(self, obj, screen):
         self.obj = obj
+        self.screen = screen
         self.obj_label = obj.obj_label
         self.obj_isLink = obj.obj_isLink
-        self.screen = screen
         self.properties_frame = None
 
         self.trigger()
@@ -35,9 +35,13 @@ class Triggers:
 
         if not GUI.GUI.isLink:
             widget = e.widget
-            x = widget.winfo_x() - widget.startX + e.x
-            y = widget.winfo_y() - widget.startY + e.y
+            pos_x = widget.winfo_x()
+            pos_y = widget.winfo_y()
+            x = pos_x - widget.startX + e.x
+            y = pos_y - widget.startY + e.y
             widget.place(x=x, y=y)
+            self.obj.obj_pos_x = pos_x
+            self.obj.obj_pos_y = pos_y
 
     def delete_object(self, e):
         if self.properties_frame is not None:
@@ -75,13 +79,13 @@ class Triggers:
 
         txt = GUI.GUI.linked_obj.obj_label.cget("text")
 
-        pos_obj1 = GUI.GUI.linked_obj.obj_label.winfo_x()
-        pos_obj2 = widget.winfo_x()
-
-        print(pos_obj1, " :\t: ", pos_obj2, "\n")
+        pos_widget_x = widget.winfo_x()
+        pos_widget_y = widget.winfo_y()
 
         for i in GUI.GUI.linked_obj.obj_links:
             print(txt + " | Link:", i, "\n")
+
+        self.screen.create_line(GUI.GUI.linked_obj.obj_pos_x, GUI.GUI.linked_obj.obj_pos_y, pos_widget_x, pos_widget_y, fill="red", arrow="last", width=2)
 
         GUI.GUI.linked_obj = None
         GUI.GUI.isLink = False

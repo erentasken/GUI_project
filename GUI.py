@@ -11,7 +11,7 @@ class GUI:
 
     def __init__(self):
 
-        self.coordinateSystem = None
+        self.coordinateScreen = None
         self.frame_left = None
         self.btn_frame = None
         self._label = None
@@ -22,14 +22,14 @@ class GUI:
         self.window.geometry("900x700+1000+80")
         self.window.title("Graphical Modeling Editor")
 
-        self.CoordinateScreen()
+        self.CoordinateSystem()
         self.create_frame()
 
         self.window.mainloop()
 
-    def CoordinateScreen(self):  # method for right part of the existing screen.
-        self.coordinateSystem = Canvas(self.window)
-        self.coordinateSystem.place(relx=0.1, rely=0, relwidth=0.9, relheight=1)
+    def CoordinateSystem(self):  # method for right part of the existing screen.
+        self.coordinateScreen = Canvas(self.window)
+        self.coordinateScreen.place(relx=0.1, rely=0, relwidth=0.9, relheight=1)
 
     def create_obj(self, obj, screen):
         newObj = objectBehaviours.Objects(obj, screen)
@@ -49,7 +49,7 @@ class GUI:
 
         for obj in self.objects:
             button_obj = Button(self.btn_frame, text=obj, bg="#EEEDDE", activebackground="#203239",
-                                command=partial(self.create_obj, obj, self.coordinateSystem))
+                                command=partial(self.create_obj, obj, self.coordinateScreen))
             button_obj.place(relwidth=0.5)
             button_obj.grid(row=int(row), column=col % 2, sticky=N + W + S + E)
             col += 1
