@@ -70,16 +70,21 @@ class Triggers:
         if self.properties_frame is not None:
             self.properties_frame.destroy()
 
-        GUI.GUI.isLink = False
-        print("Link")
-
         widget = e.widget
-        self.obj.obj_links.append(id(widget))
+        GUI.GUI.linked_obj.obj_links.append(id(widget))
 
-        txt = self.obj.obj_label.cget("text")
+        txt = GUI.GUI.linked_obj.obj_label.cget("text")
 
-        for i in self.obj.obj_links:
+        pos_obj1 = GUI.GUI.linked_obj.obj_label.winfo_x()
+        pos_obj2 = widget.winfo_x()
+
+        print(pos_obj1, " :\t: ", pos_obj2, "\n")
+
+        for i in GUI.GUI.linked_obj.obj_links:
             print(txt + " | Link:", i, "\n")
+
+        GUI.GUI.linked_obj = None
+        GUI.GUI.isLink = False
 
     # TRIGGERS #
 
@@ -97,6 +102,7 @@ class Triggers:
 
     def trigger_link(self):
         self.obj_isLink = True
+        GUI.GUI.linked_obj = self.obj
         GUI.GUI.isLink = True
 
     def trigger(self):

@@ -7,6 +7,7 @@ import objectBehaviours
 
 class GUI:
     isLink = False
+    linked_obj = None
 
     def __init__(self):
 
