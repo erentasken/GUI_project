@@ -10,11 +10,11 @@ class GUI:
         self.window = Tk()
         self.window.geometry("900x700+1000+80")
         self.window.title("Graphical Modeling Editor")
-        self.CoordinateScreen()
+        self.coordinate_screen()
         self.create_frame(self.window, self.coordinateSystem, self.objects)
         self.window.mainloop()
 
-    def CoordinateScreen(self):  # method for right part of the existing screen.
+    def coordinate_screen(self):  # method for right part of the existing screen.
         self.coordinateSystem = Canvas(self.window)
         self.coordinateSystem.place(relx=0.1, rely=0, relwidth=0.9, relheight=1)
 
@@ -28,7 +28,7 @@ class GUI:
         objectBehaviours.Movement(_label)
         objectBehaviours.objectFeature(_label, self.screen)
 
-    def create_frame(self, screen, plotScreen, objects):  # creates left-column puts the object's buttons as well.
+    def create_frame(self, screen, plot_screen, objects):  # creates left-column puts the object's buttons as well.
         col = 0
         row = 0
         frame_left = Frame(screen, bg="#141E27")
@@ -40,7 +40,7 @@ class GUI:
 
         for obj in objects:
             button_obj = Button(btn_frame, text=obj, bg="#EEEDDE", activebackground="#203239",
-                                command=partial(self.create_label, obj, plotScreen))
+                                command=partial(self.create_label, obj, plot_screen))
             button_obj.place(relwidth=0.5)
             button_obj.grid(row=int(row), column=col % 2, sticky=N + W + S + E)
             col += 1
