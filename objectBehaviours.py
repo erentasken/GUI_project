@@ -68,23 +68,27 @@ class objectFeature:
         self.obj.bind("<Double-Button-1>", self.object_feature_tab_init)  # triggers the input screen
 
 class Object:
-    def __init__(self, obj):
+    def __init__(self, obj, coordinate_system):
+        self.coordinate_system = coordinate_system
         self.LinkedObjects = []
         self.obj = obj
         self.id = id(obj)
         self.trigger()
-    @staticmethod
-    def linking(self):
-        pass
 
     def first(self,e):
         global memory
-        memory = self.id
+        widget = e.widget
+        widget.startX = widget.winfo_x()
+        widget.startY = widget.winfo_y()
+        memory = [widget.startX, widget.startY, self.id]
+
 
     def second(self,e):
+        widget = e.widget
         print(f'first {memory}')
         print(f'second{self.id}')
-
+        self.coordinate_system.create_line(memory[0], memory[1], widget.winfo_x(), widget.winfo_y(),
+                                fill="red", arrow="last", width=2)
     def trigger(self):
         self.obj.bind("<Shift-Button-1>", self.first)
         self.obj.bind("<Shift-Button-2>", self.second)

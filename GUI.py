@@ -28,7 +28,7 @@ class GUI:
         label.img = obj_img
         label.place(relx=0, rely=0)
 
-        objectBehaviours.Object(label)
+        objectBehaviours.Object(label, self.coordinate_system)
         objectBehaviours.Movement(label, self.coordinate_system)
         objectBehaviours.objectFeature(label, self.coordinate_system)
 
