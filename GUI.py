@@ -23,6 +23,8 @@ class GUI:
         label = Label(self.coordinateSystem, image=obj_img, compound=CENTER)
         label.img = obj_img
         label.place(relx=0, rely=0)
+
+        objectBehaviours.Object(label)
         objectBehaviours.Movement(label)
         objectBehaviours.objectFeature(label, self.coordinateSystem)
 

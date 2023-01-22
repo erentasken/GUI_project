@@ -1,7 +1,6 @@
 from tkinter import *
 from functools import partial
 
-
 class Movement:
     def __init__(self, obj):
         self.obj = obj
@@ -29,6 +28,8 @@ class Movement:
         self.obj.bind("<Button-1>", self.drag_start)
         self.obj.bind("<B1-Motion>", self.drag_motion)
         self.obj.bind("<Button-3>", self.delete_object)
+
+
 
 class objectFeature:
     def __init__(self, obj, screen):
@@ -63,3 +64,17 @@ class objectFeature:
 
     def trigger(self):
         self.obj.bind("<Double-Button-1>", self.object_feature_tab_init)  # triggers the input screen
+
+
+class Object:
+    def __init__(self, obj):
+        self.LinkedObjects = []
+        self.obj = obj
+        self.trigger()
+
+    @staticmethod
+    def linking(self):
+        print("a")
+
+    def trigger(self):
+        self.obj.bind("<Shift-Button-1>", self.linking)
