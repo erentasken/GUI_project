@@ -4,7 +4,6 @@ from functools import partial
 
 class Movement:
     def __init__(self, obj):
-        self.square_clicks = 0
         self.obj = obj
         self.motion_selector()
 
@@ -31,19 +30,6 @@ class Movement:
         self.obj.bind("<B1-Motion>", self.drag_motion)
         self.obj.bind("<Button-3>", self.delete_object)
 
-
-class TextInput:
-    def __init__(self, obj, screen):
-        self.obj = obj
-        self.screen = screen
-        self.trigger()
-
-    def create_text(self, e):
-        objectFeature(self.obj, self.screen)
-
-    def trigger(self):
-        self.obj.bind("<Double-Button-1>", self.create_text)  # triggers the input screen
-
 class objectFeature:
     def __init__(self, obj, screen):
         self.obj = obj
@@ -51,32 +37,28 @@ class objectFeature:
         self.objectFeatureTab = None
         self.trigger()
 
-    def close_tab(self):  # closes the tab (triggers from objectFeatureTabInit() function)
-        self.objectFeatureTab.destroy()
-
     def object_feature_tab_init(self, e):  # it creates the objectFeature adjustment tab on the right of the screen,
         self.objectFeatureTab = Frame(self.screen, bg="#141E27")
         self.objectFeatureTab.place(relx=0.9, rely=0, relwidth=0.1, relheight=1)
         self.input_area()
 
-        close_btn = Button(self.objectFeatureTab, text="X", bg="gray", fg='white', font=("Arial", 12, 'bold'), width=2,
-                           height=1, command=self.close_tab)  # close button for closing that tab.
-        close_btn.place(relx=0.95, rely=0.05, anchor='ne')
+        close_btn = Button(self.objectFeatureTab, text="X", activebackground="#CD0404",
+                           command=self.objectFeatureTab.destroy)
+        close_btn.place(relx=0.75, rely=0, relwidth=0.2, relheight=0.04)
 
-    def print_input(self, inputTxt, frame):
-        self.frame = frame
-        txt = inputTxt.get(1.0, "end-1c")
+    def print_input(self, input_txt, frame):
+        txt = input_txt.get(1.0, "end-1c")
         self.obj.config(text=txt)
-        self.frame.destroy()
+        frame.destroy()
 
     def input_area(self):
-        textFrame = Canvas(self.objectFeatureTab)
-        textFrame.place(relx=0.2, rely=0.2, relheight=0.2, relwidth=0.7)
-        inputTxt = Text(textFrame)
-        inputTxt.insert(INSERT, self.obj.cget("text"))
-        inputTxt.place(relheight=0.8, relwidth=1)
-        btn = Button(textFrame, text="✓", bg="#EEEDDE", activebackground="#203239",
-                     command=partial(self.print_input, inputTxt, textFrame))
+        text_frame = Canvas(self.objectFeatureTab)
+        text_frame.place(relx=0.05, rely=0.79, relheight=0.2, relwidth=0.9)
+        input_txt = Text(text_frame)
+        input_txt.insert(INSERT, self.obj.cget("text"))
+        input_txt.place(relheight=0.8, relwidth=1)
+        btn = Button(text_frame, text="✓", bg="#EEEDDE", activebackground="#203239",
+                     command=partial(self.print_input, input_txt, text_frame))
         btn.place(rely=0.8, relheight=0.2, relwidth=1)
 
     def trigger(self):

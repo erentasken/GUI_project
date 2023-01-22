@@ -3,34 +3,30 @@ from tkinter import Canvas
 from functools import partial
 import objectBehaviours
 
-
 class GUI:
     def __init__(self):
+        self.coordinateSystem = None
         self.objects = {"arrow", "rectangle"}  # list of shapes
         self.window = Tk()
         self.window.geometry("900x700+1000+80")
         self.window.title("Graphical Modeling Editor")
-        self.coordinate_screen()
-        self.create_frame(self.window, self.coordinateSystem, self.objects)
+        self.coordinate_screen()#generates the right part of the screen
+        self.create_frame(self.window)
         self.window.mainloop()
 
     def coordinate_screen(self):  # method for right part of the existing screen.
         self.coordinateSystem = Canvas(self.window)
         self.coordinateSystem.place(relx=0.1, rely=0, relwidth=0.9, relheight=1)
 
-    def create_label(self, obj, screen):
-        self.obj = obj
-        self.screen = screen
-        obj_img = PhotoImage(file="images\\" + self.obj + ".png")
-        _label = Label(self.screen, image=obj_img, compound=CENTER)
-        _label.img = obj_img
-        _label.place(relx=0, rely=0)
-        objectBehaviours.Movement(_label)
-        objectBehaviours.objectFeature(_label, self.screen)
+    def create_label(self, obj):
+        obj_img = PhotoImage(file="images\\" + obj + ".png")
+        label = Label(self.coordinateSystem, image=obj_img, compound=CENTER)
+        label.img = obj_img
+        label.place(relx=0, rely=0)
+        objectBehaviours.Movement(label)
+        objectBehaviours.objectFeature(label, self.coordinateSystem)
 
-    def create_frame(self, screen, plot_screen, objects):  # creates left-column puts the object's buttons as well.
-        col = 0
-        row = 0
+    def create_frame(self, screen):  # creates left-column puts the object's buttons as well.
         frame_left = Frame(screen, bg="#141E27")
         frame_left.place(relx=0, rely=0, relwidth=0.1, relheight=1)
         btn_frame = Frame(frame_left, bg="#141E27")
@@ -38,10 +34,9 @@ class GUI:
         btn_frame.columnconfigure(0, weight=1)
         btn_frame.columnconfigure(1, weight=1)
 
-        for obj in objects:
+        for index, obj in enumerate(self.objects): # enumerate built-in function provide us to use index variable which I had use in line 44
             button_obj = Button(btn_frame, text=obj, bg="#EEEDDE", activebackground="#203239",
-                                command=partial(self.create_label, obj, plot_screen))
+                                command=partial(self.create_label, obj))
             button_obj.place(relwidth=0.5)
-            button_obj.grid(row=int(row), column=col % 2, sticky=N + W + S + E)
-            col += 1
-            row += 0.5
+            button_obj.grid(row=index // 2, column=index % 2, sticky=N + W + S + E)
+
