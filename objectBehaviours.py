@@ -1,8 +1,9 @@
 from tkinter import *
 from functools import partial
-
+memory = 0
 class Movement:
-    def __init__(self, obj):
+    def __init__(self, obj, coordinate_system):
+        self.coordinate_system = coordinate_system
         self.obj = obj
         self.motion_selector()
 
@@ -18,6 +19,7 @@ class Movement:
         x = widget.winfo_x() - widget.startX + e.x
         y = widget.winfo_y() - widget.startY + e.y
         widget.place(x=x, y=y)
+
 
     @staticmethod
     def delete_object(e):
@@ -65,16 +67,24 @@ class objectFeature:
     def trigger(self):
         self.obj.bind("<Double-Button-1>", self.object_feature_tab_init)  # triggers the input screen
 
-
 class Object:
     def __init__(self, obj):
         self.LinkedObjects = []
         self.obj = obj
+        self.id = id(obj)
         self.trigger()
-
     @staticmethod
     def linking(self):
-        print("a")
+        pass
+
+    def first(self,e):
+        global memory
+        memory = self.id
+
+    def second(self,e):
+        print(f'first {memory}')
+        print(f'second{self.id}')
 
     def trigger(self):
-        self.obj.bind("<Shift-Button-1>", self.linking)
+        self.obj.bind("<Shift-Button-1>", self.first)
+        self.obj.bind("<Shift-Button-2>", self.second)
