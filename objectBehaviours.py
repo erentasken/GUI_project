@@ -18,6 +18,7 @@ class Objects:
         self.short_edge = 150
         self.obj_isLink = False
         self.obj_links = []
+        self.obj_line = []
 
         self.create_label()
 
@@ -49,3 +50,19 @@ class TextInput:
         btn = Button(textFrame, text="✓", bg="#EEEDDE", activebackground="#203239",
                      command=partial(self.printInput, inputTxt, textFrame))
         btn.place(rely=0.8, relheight=0.2, relwidth=1)
+
+
+class Line:
+    def __init__(self, screen, start_obj, dest_obj):
+        self.screen = screen
+        self.start_obj = start_obj
+        self.dest_obj = dest_obj
+        self.line = None
+        self.create_line()
+
+    def create_line(self):
+        self.line = self.screen.create_line(self.start_obj.obj_pos_x, self.start_obj.obj_pos_y, self.dest_obj.obj_pos_x,
+                                       self.dest_obj.obj_pos_y, fill="red", arrow="last", width=2)
+
+    def upgrade_line(self):
+        self.screen.coords(self.line, self.start_obj.obj_pos_x, self.start_obj.obj_pos_y, self.dest_obj.obj_pos_x, self.dest_obj.obj_pos_y)

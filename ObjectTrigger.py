@@ -10,6 +10,7 @@ class Triggers:
         self.obj_label = obj.obj_label
         self.obj_isLink = obj.obj_isLink
         self.properties_frame = None
+        self.line = None
 
         self.trigger()
 
@@ -42,6 +43,10 @@ class Triggers:
             widget.place(x=x, y=y)
             self.obj.obj_pos_x = pos_x
             self.obj.obj_pos_y = pos_y
+
+        for i in self.obj.obj_line:
+            i.upgrade_line()
+
 
     def delete_object(self, e):
         if self.properties_frame is not None:
@@ -85,7 +90,10 @@ class Triggers:
         for i in GUI.GUI.linked_obj.obj_links:
             print(txt + " | Link:", i, "\n")
 
-        self.screen.create_line(GUI.GUI.linked_obj.obj_pos_x, GUI.GUI.linked_obj.obj_pos_y, pos_widget_x, pos_widget_y, fill="red", arrow="last", width=2)
+        line = objectBehaviours.Line(self.screen,  GUI.GUI.linked_obj, self.obj)
+
+        self.obj.obj_line.append(line)
+        GUI.GUI.linked_obj.obj_line.append(line)
 
         GUI.GUI.linked_obj = None
         GUI.GUI.isLink = False
