@@ -1,6 +1,9 @@
 from tkinter import *
 from functools import partial
+
 memory = 0
+
+
 class Movement:
     def __init__(self, obj, coordinate_system):
         self.coordinate_system = coordinate_system
@@ -20,7 +23,6 @@ class Movement:
         y = widget.winfo_y() - widget.startY + e.y
         widget.place(x=x, y=y)
 
-
     @staticmethod
     def delete_object(e):
         widget = e.widget
@@ -32,8 +34,7 @@ class Movement:
         self.obj.bind("<Button-3>", self.delete_object)
 
 
-
-class objectFeature:
+class ObjectFeature:
     def __init__(self, obj, screen):
         self.obj = obj
         self.screen = screen
@@ -67,28 +68,37 @@ class objectFeature:
     def trigger(self):
         self.obj.bind("<Double-Button-1>", self.object_feature_tab_init)  # triggers the input screen
 
+
 class Object:
     def __init__(self, obj, coordinate_system):
         self.coordinate_system = coordinate_system
         self.LinkedObjects = []
+        self.Links = []
         self.obj = obj
+        self.my_line = None
         self.id = id(obj)
         self.trigger()
 
-    def first(self,e):
+    def first(self, e):
         global memory
         widget = e.widget
         widget.startX = widget.winfo_x()
         widget.startY = widget.winfo_y()
-        memory = [widget.startX, widget.startY, self.id]
-
-
-    def second(self,e):
+        memory = [widget.startX, widget.startY, self.id, self.Links]#first 2 ind = current coordinates of obj
+                                                                    #third ind = objects's id
+                                                                    #fourth ind = links that obj have
+    def second(self, e):
         widget = e.widget
-        print(f'first {memory}')
-        print(f'second{self.id}')
-        self.coordinate_system.create_line(memory[0], memory[1], widget.winfo_x(), widget.winfo_y(),
-                                fill="red", arrow="last", width=2)
+        print(f'comes {memory[2]}')
+        print(f'goes {self.id}')
+        self.my_line = self.coordinate_system.create_line(memory[0], memory[1], widget.winfo_x(), widget.winfo_y(),
+                                                          fill="red", arrow="last", width=2)
+        memory[3].append(self.my_line)
+        self.Links.append(self.my_line)
+        print(f'List of links of arrow goes to {self.Links}, list of links of arrow comes to : {memory[3]}')
+        #self.coordinate_system.delete(self.my_line) ,, it is for deletion
+
     def trigger(self):
         self.obj.bind("<Shift-Button-1>", self.first)
         self.obj.bind("<Shift-Button-2>", self.second)
+

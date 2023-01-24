@@ -30,7 +30,7 @@ class GUI:
 
         objectBehaviours.Object(label, self.coordinate_system)
         objectBehaviours.Movement(label, self.coordinate_system)
-        objectBehaviours.objectFeature(label, self.coordinate_system)
+        objectBehaviours.ObjectFeature(label, self.coordinate_system)
 
     def create_frame(self, screen):  # creates left-column puts the object's buttons as well.
         frame_left = Frame(screen, bg="#141E27")
