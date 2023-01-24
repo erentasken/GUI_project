@@ -39,15 +39,12 @@ class TextInput:
     def create_text(self):
         text_frame = Canvas(self.screen)
         text_frame.place(relx=0.05, rely=0.79, relheight=0.2, relwidth=0.9)
-
         self.input_txt = Text(text_frame)
         self.input_txt.insert(INSERT, self.obj.cget("text"))
         self.input_txt.place(relheight=0.8, relwidth=1)
-
         btn = Button(text_frame, text="✓", bg="#EEEDDE", activebackground="#203239",
                      command=partial(self.print_input, self.input_txt, text_frame))
         btn.place(rely=0.8, relheight=0.2, relwidth=1)
-
 
 class Link:
     def __init__(self, screen, start_obj, des_obj):

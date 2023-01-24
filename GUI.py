@@ -9,21 +9,16 @@ class Gui:
     lines = []
 
     def __init__(self):
-
         self.coordinateScreen = None
         self.frame_left = None
         self.btn_frame = None
         self._label = None
-
         self.objects = {"circle", "rectangle"}  # list of shapes
-
         self.window = Tk()
         self.window.geometry("900x700+1000+80")
         self.window.title("Graphical Modeling Editor")
-
         self.coordinate_system()
         self.create_frame()
-
         self.window.mainloop()
 
     def coordinate_system(self):  # method for right part of the existing screen.
