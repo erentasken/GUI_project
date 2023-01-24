@@ -62,7 +62,7 @@ class Line:
 
     def create_line(self):
         self.line = self.screen.create_line(self.start_obj.obj_pos_x, self.start_obj.obj_pos_y, self.dest_obj.obj_pos_x,
-                                       self.dest_obj.obj_pos_y, fill="red", arrow="last", width=2)
+                                       self.dest_obj.obj_pos_y, fill="black", arrow="last", width=2)
 
     def upgrade_line(self):
         self.screen.coords(self.line, self.start_obj.obj_pos_x, self.start_obj.obj_pos_y, self.dest_obj.obj_pos_x, self.dest_obj.obj_pos_y)
