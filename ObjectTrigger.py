@@ -44,9 +44,8 @@ class Triggers:
             self.obj.obj_pos_x = pos_x
             self.obj.obj_pos_y = pos_y
 
-        for i in self.obj.obj_line:
-            i.upgrade_line()
-
+        for line in self.obj.obj_line:
+            line.upgrade_line()
 
     def delete_object(self, e):
         if self.properties_frame is not None:
@@ -55,6 +54,12 @@ class Triggers:
         if not GUI.GUI.isLink:
             widget = e.widget
             widget.destroy()
+
+        for line in self.obj.obj_line:
+            line.delete_line()
+
+    def delete_l(self, e):
+        print("hello")
 
     def obj_properties_screen(self, e):
         if not GUI.GUI.isLink:
@@ -90,10 +95,12 @@ class Triggers:
         for i in GUI.GUI.linked_obj.obj_links:
             print(txt + " | Link:", i, "\n")
 
-        line = objectBehaviours.Line(self.screen,  GUI.GUI.linked_obj, self.obj)
+        line = objectBehaviours.Line(self.screen, GUI.GUI.linked_obj, self.obj)
 
         self.obj.obj_line.append(line)
         GUI.GUI.linked_obj.obj_line.append(line)
+
+        self.screen.tag_bind(line, "<Button-3>", print("hello"))
 
         GUI.GUI.linked_obj = None
         GUI.GUI.isLink = False
@@ -107,7 +114,7 @@ class Triggers:
         self.obj_label.bind("<B1-Motion>", self.drag_motion)
 
     def trigger_delete(self):
-        self.obj_label.bind("<Button-3>", self.delete_object)
+         self.obj_label.bind("<Button-3>", self.delete_object)
 
     def trigger_prop_screen(self):
         self.obj_label.bind("<Double-Button-1>", self.obj_properties_screen)

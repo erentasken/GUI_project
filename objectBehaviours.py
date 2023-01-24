@@ -66,3 +66,6 @@ class Line:
 
     def upgrade_line(self):
         self.screen.coords(self.line, self.start_obj.obj_pos_x, self.start_obj.obj_pos_y, self.dest_obj.obj_pos_x, self.dest_obj.obj_pos_y)
+
+    def delete_line(self):
+        self.screen.delete(self.line)
