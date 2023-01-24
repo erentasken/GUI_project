@@ -1,3 +1,3 @@
 from tkinter import *
-from GUI import GUI
-GUI = GUI()
+from GUI import Gui
+GUI = Gui()
