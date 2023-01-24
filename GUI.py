@@ -17,7 +17,7 @@ class GUI:
         self.btn_frame = None
         self._label = None
 
-        self.objects = {"arrow", "rectangle"}  # list of shapes
+        self.objects = {"circle", "rectangle"}  # list of shapes
 
         self.window = Tk()
         self.window.geometry("900x700+1000+80")
