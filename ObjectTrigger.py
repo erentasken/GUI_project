@@ -36,7 +36,7 @@ class Triggers:
             self.obj.obj_pos_x = pos_x
             self.obj.obj_pos_y = pos_y
         for line in self.obj.obj_line:
-            line.upgrade_line()
+            line.update_link()
 
     def delete_object(self, e):
         if self.properties_frame is not None:
