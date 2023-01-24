@@ -30,6 +30,7 @@ class Triggers:
                 self.get_id(e)
             self.obj_isLink = False
 
+
     def drag_motion(self, e):
         if self.properties_frame is not None:
             self.properties_frame.destroy()
@@ -58,8 +59,11 @@ class Triggers:
         for line in self.obj.obj_line:
             line.delete_line()
 
-    def delete_l(self, e):
-        print("hello")
+    def delete_l(self, event):
+        for line in GUI.GUI.lines:
+            if line.line == event.widget.find_closest(event.x, event.y)[0]:
+                self.screen.delete(line.line)
+                break
 
     def obj_properties_screen(self, e):
         if not GUI.GUI.isLink:
@@ -95,12 +99,13 @@ class Triggers:
         for i in GUI.GUI.linked_obj.obj_links:
             print(txt + " | Link:", i, "\n")
 
-        line = objectBehaviours.Line(self.screen, GUI.GUI.linked_obj, self.obj)
+        self.line = objectBehaviours.Line(self.screen, GUI.GUI.linked_obj, self.obj)
 
-        self.obj.obj_line.append(line)
-        GUI.GUI.linked_obj.obj_line.append(line)
+        self.obj.obj_line.append(self.line)
+        GUI.GUI.linked_obj.obj_line.append(self.line)
 
-        self.screen.tag_bind(line, "<Button-3>", print("hello"))
+        GUI.GUI.lines.append(self.line)
+        print(GUI.GUI.lines)
 
         GUI.GUI.linked_obj = None
         GUI.GUI.isLink = False
@@ -114,10 +119,13 @@ class Triggers:
         self.obj_label.bind("<B1-Motion>", self.drag_motion)
 
     def trigger_delete(self):
-         self.obj_label.bind("<Button-3>", self.delete_object)
+        self.obj_label.bind("<Button-3>", self.delete_object)
 
     def trigger_prop_screen(self):
         self.obj_label.bind("<Double-Button-1>", self.obj_properties_screen)
+
+    def trigger_canvas(self):
+        self.screen.bind("<Button-3>", self.delete_l)
 
     def trigger_link(self):
         self.obj_isLink = True
@@ -128,4 +136,5 @@ class Triggers:
         self.trigger_start()
         self.trigger_motion()
         self.trigger_delete()
+        self.trigger_canvas()
         self.trigger_prop_screen()

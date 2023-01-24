@@ -8,6 +8,7 @@ import objectBehaviours
 class GUI:
     isLink = False
     linked_obj = None
+    lines = []
 
     def __init__(self):
 
