@@ -13,7 +13,7 @@ class Gui:
         self.frame_left = None
         self.btn_frame = None
         self._label = None
-        self.objects = {"circle", "rectangle"}  # list of shapes
+        self.objects = {"circle", "rectangle", "diamond"}  # list of shapes
         self.window = Tk()
         self.window.geometry("900x700+1000+80")
         self.window.title("Graphical Modeling Editor")

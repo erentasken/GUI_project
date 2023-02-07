@@ -2,6 +2,7 @@ from tkinter import *
 from functools import partial
 import ObjectTrigger
 
+
 class Objects:
     def __init__(self, obj, screen):
         self.obj = obj
@@ -20,9 +21,10 @@ class Objects:
 
     def create_label(self):
         self.obj_img = PhotoImage(file="images\\" + self.obj + ".png")
-        self.obj_label = Label(self.screen, image=self.obj_img, compound=CENTER)
+        self.obj_label = Label(self.screen, image=self.obj_img, compound=CENTER, background="black")
         self.obj_label.img = self.obj_img
         self.obj_label.place(relx=0, rely=0)
+
 
 class TextInput:
     def __init__(self, obj, screen):
@@ -44,6 +46,7 @@ class TextInput:
         btn = Button(text_frame, text="✓", bg="#EEEDDE", activebackground="#203239",
                      command=partial(self.print_input, text_frame))
         btn.place(rely=0.8, relheight=0.2, relwidth=1)
+
 
 class Link:
     def __init__(self, screen, start_obj, des_obj):
